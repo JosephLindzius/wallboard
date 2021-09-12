@@ -1,0 +1,8 @@
+{
+  "name": "Wallboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "2db05e28"
+}
