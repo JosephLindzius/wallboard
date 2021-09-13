@@ -11,7 +11,7 @@ import {Capacitor} from "@capacitor/core";
 })
 export class PhotoService {
   public photos: Photo[] = [];
-  private PHOTO_STORAGE: string = "photos";
+  private PHOTO_STORAGE: string = "wb-photos";
   private platform: Platform;
 
   constructor(platform: Platform) {
@@ -23,43 +23,36 @@ export class PhotoService {
     const capturedPhoto = await Camera.getPhoto({
       resultType: CameraResultType.Uri,
       source: CameraSource.Camera,
-      quality: 100
+      quality: 100,
+      correctOrientation: true
     });
     const savedImageFile = await this.savePicture(capturedPhoto);
     this.photos.unshift(savedImageFile);
 
-    Storage.set({
+    await Storage.set({
       key: this.PHOTO_STORAGE,
       value: JSON.stringify(this.photos)
     });
   }
 
-  public async loadSaved() {  // Retrieve cached photo array data
+  public async loadSaved() {
     const photoList = await Storage.get({ key: this.PHOTO_STORAGE });
     this.photos = JSON.parse(photoList.value) || [];
 
-    // Easiest way to detect when running on the web:
-    // “when the platform is NOT hybrid, do this”
     if (!this.platform.is('hybrid')) {
-      // Display the photo by reading into base64 format
       for (let photo of this.photos) {
-        // Read each saved photo's data from the Filesystem
         const readFile = await Filesystem.readFile({
           path: photo.filepath,
           directory: Directory.Data
         });
-
-        // Web platform only: Load the photo as base64 data
         photo.webviewPath = `data:image/jpeg;base64,${readFile.data}`;
       }
     }
   }
 
   private async savePicture(cameraPhoto: Phot) {
-    // Convert photo to base64 format, required by Filesystem API to save
     const base64Data = await this.readAsBase64(cameraPhoto);
 
-    // Write the file to the data directory
     const fileName = new Date().getTime() + '.jpeg';
     const savedFile = await Filesystem.writeFile({
       path: fileName,

@@ -33,20 +33,20 @@ export class WeatherReportService {
 
   private callWeatherApi(data: GeoCoords){
     return this.http.get<any>(this.ROOT_WEATHER_API_URL + "?lat=" + data.latitude + "&lon=" + data.longitude).pipe(
-      delay(500),
       map((data) => {
         return data.properties.timeseries.map((forecast) => {
           if (forecast.data.next_1_hours) {
             return {
               time: forecast.time,
               temperature: forecast.data.instant.details.air_temperature,
-              next_hour: forecast.data.next_1_hour
+              next_hour: forecast.data.next_1_hours
             }
           }
           return {
               time: forecast.time,
               temperature: forecast.data.instant.details.air_temperature,
-            }
+              next_hour: forecast.data.next_6_hours || forecast.data.next_12_hours
+          }
         })
       })
     )

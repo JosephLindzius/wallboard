@@ -4,42 +4,60 @@
       Weather
     </ion-title>
   </ion-toolbar>
+  <ion-searchbar></ion-searchbar>
 </ion-header>
-
-
-<ion-content class="ion-padding">
-
-  <ion-grid>
-    <ion-row *ngIf="getCityLocation$ | async as location">
-      <ion-col>
-        <ion-grid>
-          <ion-row>
-            <ion-col size="6">
-             <h3>{{location.city}}</h3>
-            </ion-col>
-            <ion-col size="6">
-              <h3>{{location.countryCode}}</h3>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <div *ngIf="weatherReport$ | async as weather">
-          <span>Current Temperate: {{weather[0].temperature}}</span>
-        </div>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-margin">
-
-    </ion-row>
-  </ion-grid>
-
-      <ion-item *ngIf="imageSource$ | async as imageSource">
-        <ion-thumbnail slot="end">
-          <ion-img [src]="imageSource"></ion-img>
-        </ion-thumbnail>
-        <ion-label>Random Dog</ion-label>
-      </ion-item>
+<ion-content class="ion-padding background">
+  <ng-template #loadingBlock>
+    <ion-text color="dark">
+      <h2>Loading... </h2>
+    </ion-text>
+    <ion-spinner class="ion-float-end" name="bubbles" vertical="bottom" horizontal="center" duration="2000"></ion-spinner>
+  </ng-template>
+  <ion-item>
+    <ion-grid>
+      <ion-row *ngIf="getCityLocation$ | async as location; else loadingBlock">
+        <ion-col size="12" class="ion-text-center">
+          <ion-text color="dark">
+            <h3 class="dark-text">{{location.city}}, {{location.countryCode}}</h3>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+      <ion-row div *ngIf="weatherReport$ | async as weather">
+        <ion-col size="12" class="ion-text-center">
+          <ion-text color="dark">
+            <p class="dark-text">Current Temperature: {{weather[0].temperature + "&#8451;"}}</p>
+          </ion-text>
+          <ion-img class="svg" [src]="'./assets/icon/svg/'+weather[0].next_hour.summary.symbol_code+'.svg'"></ion-img>
+        </ion-col>
+      </ion-row>
+      <ion-row class="ion-margin" >
+        <ion-col size="12">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <ion-item *ngIf="imageSource$ | async as imageSource" class="ion-margin-top">
+    <ion-thumbnail slot="end">
+      <ion-img [src]="imageSource"></ion-img>
+    </ion-thumbnail>
+    <ion-label>Random Dog</ion-label>
+  </ion-item>
+  <ion-item *ngIf="quote$ | async as quote" class="ion-margin-top">
+    <ion-text>
+      <h6 class="ion-text-center">Random joke:</h6>
+      <p class="ion-text-center ion-margn-top">{{quote.value[0].joke}}</p>
+    </ion-text>
+  </ion-item>
+  <ion-card *ngIf="cocktail$ | async as cocktail">
+    <ion-item>
+      <ion-icon name="wine-outline"></ion-icon>
+      <ion-label>{{cocktail.drinks[0].strDrink}}</ion-label>
+      <ion-button fill="outline" slot="end">View</ion-button>
+    </ion-item>
+    <ion-card-content>
+      <ion-text>
+        <p>{{cocktail.drinks[0].strInstructions}}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,7 +1,8 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnChanges, OnInit, ViewChild} from '@angular/core';
 import {IonReorderGroup} from "@ionic/angular";
-import {InspirationQuoteService} from "../services/inspiration-quote.service";
 import {Observable} from "rxjs";
+import {TodoService} from "../services/todo.service";
+import {Todo} from "../types/types";
 
 @Component({
   selector: 'app-tab1',
@@ -10,15 +11,16 @@ import {Observable} from "rxjs";
 })
 export class Tab1Page implements OnInit {
 
-  public quote!: Observable<string>;
+
+  todos$!: Observable<Todo[]>
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
-  constructor(private inspirationalQuote: InspirationQuoteService) { }
+  constructor(private ts: TodoService) { }
 
   ngOnInit (){
-    this.quote = this.inspirationalQuote.getQuote();
-    console.log(this.quote.subscribe(console.log))
+    this.todos$ = this.ts.getTodos();
   }
+
 
   doReorder(ev: CustomEvent) {
     ev.detail.complete();

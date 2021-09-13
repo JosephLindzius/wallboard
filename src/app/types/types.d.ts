@@ -28,3 +28,17 @@ export interface CityLocation {
   city: string,
   countryCode: string
 }
+
+export interface Todo {
+  id?: string;
+  title: string;
+  desc: string;
+  date: string;
+}
+
+export interface User {
+  id: string,
+  name: string,
+  todos: Todo[],
+  userId: string
+}

@@ -27,7 +27,6 @@ export class CityLocatorService {
        const headers = new HttpHeaders({ "Content-Type": "application/json" });
         return this.http.get<any>(this.CITY_DECODER_URL+ "?latitude=" + data.latitude + "&longitude=" + data.longitude+"&localityLanguage=en", {headers}).pipe(
           map((data)=>{
-            console.log(data);
             return {
               city: data.locality,
               countryCode: data.countryCode

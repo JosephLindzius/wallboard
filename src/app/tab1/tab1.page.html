@@ -5,17 +5,20 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
-<ion-content>
+<ng-template #loading>
+  <h1 class="ion-text-center">Loading...</h1>
+  <ion-spinner name="line"></ion-spinner>
+</ng-template>
+<ion-content padding class="background" *ngIf="todos$ | async as todos; else loading">
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-  <h1 class="ion-text-center ion-margin-vertical ion-text-capitalize">Todo List</h1>
-  <h6 class="ion-text-center">Quote of the day:</h6>
-  <p class="ion-text-center ion-margn-top">{{quote | async}}</p>
-  <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)">
+  <ion-text>
+    <h1 class="ion-text-center ion-margin-vertical ion-text-capitalize">Hello, {{todos[0].name}}</h1>
+  </ion-text>
+  <ion-reorder-group disabled="false" (ionItemReorder)="doReorder($event)"  >
 
       <ion-item>
         <ion-label>
@@ -36,7 +39,17 @@
           <ion-button color="danger">X</ion-button>
         </ion-item>
     </ion-reorder>
-    <!-- Sliding item with text options on both sides -->
+    <ion-reorder *ngFor="let todo of todos[0].todos; index as i">
+      <ion-item>
+        <ion-label>
+          {{todo}}<hr>
+        </ion-label>
+        <ion-button color="primary">View</ion-button>
+        <ion-button color="secondary">Edit</ion-button>
+        <ion-button color="danger">X</ion-button>
+      </ion-item>
+    </ion-reorder>
+
 
   </ion-reorder-group>
   <ion-item-sliding>

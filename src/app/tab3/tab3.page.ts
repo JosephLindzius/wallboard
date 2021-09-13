@@ -5,7 +5,9 @@ import {CityLocation, DogPicture, GeoCoords, WeatherDisplay} from "../types/type
 import {WeatherReportService} from "../services/weather-report.service";
 import {GeolocationLookupService} from "../services/geolocation-lookup.service";
 import {CityLocatorService} from "../services/city-locator.service";
-import {tap} from "rxjs/operators";
+import {map, take, tap} from "rxjs/operators";
+import {InspirationQuoteService} from "../services/inspiration-quote.service";
+import {CocktailService} from "../services/cocktail.service";
 
 @Component({
   selector: 'app-tab3',
@@ -15,19 +17,25 @@ import {tap} from "rxjs/operators";
 export class Tab3Page implements OnInit, OnChanges {
 
   public imageSource$!: Observable<string>;
-  public weatherReport$!: Observable<WeatherDisplay>;
+  public weatherReport$!: Observable<WeatherDisplay[]>;
   public getCityLocation$!: Observable<CityLocation>;
+  public quote$: Observable<string>
+  public cocktail$: Observable<any>
 
-
-  constructor(private dogPictureService: DogPictureService,
-              private weatherReportService: WeatherReportService,
-              private cityLocator: CityLocatorService,
-              ) {}
+  constructor(
+    private dogPictureService: DogPictureService,
+    private weatherReportService: WeatherReportService,
+    private cityLocator: CityLocatorService,
+    private inspirationQuoteService: InspirationQuoteService,
+    private cocktailService: CocktailService
+  ) {}
 
   ngOnInit(){
-     this.getCityLocation$ = this.cityLocator.getLocation().pipe(tap(console.log));
+     this.getCityLocation$ = this.cityLocator.getLocation();
      this.imageSource$ = this.dogPictureService.getDogPicturePayload();
      this.weatherReport$ = this.weatherReportService.getWeatherReport();
+     this.quote$ = this.inspirationQuoteService.quotes;
+     this.cocktail$ = this.cocktailService.cocktail;
   }
 
   ngOnChanges(){

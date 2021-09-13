@@ -1,0 +1,30 @@
+ion-content.background {
+  --background: url('../../assets/background_tab_3.jpg') 0 0/100% 100% no-repeat;
+}
+
+ion-grid.wrapper-background {
+  background: url('../../assets/background_tab_3_1.jpg') 0 0/100% 100% no-repeat;
+  backdrop-filter: blur(30px);
+  background-blend-mode: color-burn;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+ion-spinner {
+    transform: scale(3);
+  }
+
+div.row-background {
+  background: rgba(42,42,42, 0.3) 0 0/100% 100% no-repeat;
+  backdrop-filter: blur(1px);
+  border-radius: 4px;
+}
+
+.dark-text {
+  text-shadow: black 4px 4px 4px;
+}
+
+ion-img.svg {
+  max-width: 200px;
+  margin: 0 auto;
+}
