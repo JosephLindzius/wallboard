@@ -7,3 +7,39 @@
 </ion-header>
 
 
+<ion-content class="ion-padding">
+
+  <ion-grid>
+    <ion-row *ngIf="getCityLocation$ | async as location">
+      <ion-col>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6">
+             <h3>{{location.city}}</h3>
+            </ion-col>
+            <ion-col size="6">
+              <h3>{{location.countryCode}}</h3>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <div *ngIf="weatherReport$ | async as weather">
+          <span>Current Temperate: {{weather[0].temperature}}</span>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-margin">
+
+    </ion-row>
+  </ion-grid>
+
+      <ion-item *ngIf="imageSource$ | async as imageSource">
+        <ion-thumbnail slot="end">
+          <ion-img [src]="imageSource"></ion-img>
+        </ion-thumbnail>
+        <ion-label>Random Dog</ion-label>
+      </ion-item>
+</ion-content>
