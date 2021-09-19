@@ -1,0 +1,12 @@
+@media (prefers-color-scheme: dark) {
+  ion-input.accent {
+    --background: #FFFFFF;
+  }
+}
+
+/* Fallback for older browsers or manual mode */
+body.dark {
+  ion-input.accent {
+    --background: #FFFFFF;
+  }
+}

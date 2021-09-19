@@ -1,0 +1,48 @@
+<ion-content>
+  <ion-header [translucent]="true">
+    <ion-toolbar>
+      <ion-title>
+        Wallboard Login
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-text class="ion-text-center">
+          <h1>Welcome to Wallboard</h1>
+          <h3>Kinetic Energy</h3>
+        </ion-text>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <ion-button expand="block" (click)="loginWithGoogle()">
+          <ion-icon class="ion-margin" name="logo-google"></ion-icon>
+          <ion-label>Login with Google</ion-label>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <ion-col>
+          <ion-button expand="block" (click)="presentLoginModal()">
+            <ion-img class="wallboard-icon" [src]="'./assets/logo.svg'"></ion-img>
+            <ion-label>Login with Wallboard</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col>
+        <ion-col>
+          <ion-button expand="block" (click)="presentRegisterModal()">
+            <ion-img class="wallboard-icon" [src]="'./assets/logo.svg'"></ion-img>
+            <ion-label>Register with Wallboard</ion-label>
+          </ion-button>
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

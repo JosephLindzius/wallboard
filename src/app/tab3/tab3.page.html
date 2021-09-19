@@ -1,17 +1,10 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Weather
-    </ion-title>
-  </ion-toolbar>
-  <ion-searchbar></ion-searchbar>
-</ion-header>
+<wb-header [name]="'Weather & More'"></wb-header>
 <ion-content class="ion-padding background">
   <ng-template #loadingBlock>
     <ion-text color="dark">
       <h2>Loading... </h2>
     </ion-text>
-    <ion-spinner class="ion-float-end" name="bubbles" vertical="bottom" horizontal="center" duration="2000"></ion-spinner>
+    <ion-spinner class="ion-float-end" name="bubbles" vertical="top" horizontal="center" duration="2000"></ion-spinner>
   </ng-template>
   <ion-item>
     <ion-grid>

@@ -37,8 +37,15 @@ export interface Todo {
 }
 
 export interface User {
-  id: string,
+  id?: string,
   name: string,
   todos: Todo[],
   userId: string
+  email: string
+}
+
+export interface RegisterInfo {
+  email: string,
+  password: string,
+  name?: string
 }
