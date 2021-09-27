@@ -10,6 +10,9 @@ import {HeaderComponent} from "../components/header/header.component";
 import {LogoutComponent} from "../components/logout/logout.component";
 import {FirebaseAuthentication} from "@ionic-native/firebase-authentication";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {TodoFormComponent} from "../components/todo-form/todo-form.component";
+import {TodoDetailComponent} from "../components/todo-detail/todo-detail.component";
+
 
 @NgModule({
   imports: [
@@ -18,12 +21,14 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
     FormsModule,
     ReactiveFormsModule,
     Tab1PageRoutingModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   declarations: [
     Tab1Page,
     HeaderComponent,
-    LogoutComponent
+    LogoutComponent,
+    TodoFormComponent,
+    TodoDetailComponent
   ]
 })
 export class Tab1PageModule {}

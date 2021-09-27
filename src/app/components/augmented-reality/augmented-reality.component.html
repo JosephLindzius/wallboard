@@ -1,0 +1,9 @@
+<a-scene *ngIf="loaded" embedded arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'>
+  <a-marker type="pattern" url="./assets/pattern-wb-logo-bw.patt">
+    <a-box scale="0.5 0.5 0.5" position="0 0 0" mmd='outline: true afterglow:2.0;'></a-box>
+  </a-marker>
+
+  <a-entity camera ></a-entity>
+
+</a-scene>
+<ion-button extend="block" class="a-enter-vr-button" style="bottom: 50px; background: var(--ion-background-color);" (click)="goToLogin()">Go back</ion-button>

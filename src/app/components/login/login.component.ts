@@ -1,16 +1,12 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import {Component, OnInit} from '@angular/core';
+import { GoogleAuthProvider } from "firebase/auth";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
-import {redirectLoggedInTo} from "@angular/fire/compat/auth-guard";
 import {ModalController} from "@ionic/angular";
 import {RegisterComponent} from "../register/register.component";
 import {RegisterInfo} from "../../types/types";
-import {of} from "rxjs";
 import {UserService} from "../../services/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Location} from "@angular/common";
-import {map, tap} from "rxjs/operators";
-import {connectableObservableDescriptor} from "rxjs/internal/observable/ConnectableObservable";
 import firebase from "firebase/compat";
 import UserCredential = firebase.auth.UserCredential;
 
@@ -71,9 +67,8 @@ export class LoginComponent implements OnInit {
   registerWithWallboard(registerInfo: RegisterInfo) {
     this.fireAuth.createUserWithEmailAndPassword(registerInfo.email, registerInfo.password)
       .then((userCred) => {
-        if (userCred) {
-          this.us.addUser(registerInfo, userCred)
-            .then(() => this.router.navigate(['home']));
+        if (userCred.additionalUserInfo.isNewUser) {
+          this.us.addUser(registerInfo, userCred).then(() => this.router.navigate(['home']));
         }
       })
 
@@ -85,12 +80,12 @@ export class LoginComponent implements OnInit {
 
   loginWithGoogle() {
     this.fireAuth.signInWithPopup(this.provider).then((userCred) => {
-      this.checkid(userCred)
+      this.checkId(userCred)
       return this.router.navigate(['home'])
     })
   }
 
-  private async checkid(userCredential: UserCredential) {
+  private async checkId(userCredential: UserCredential) {
     if (userCredential.additionalUserInfo.isNewUser) {
       await this.us.addGoogleUser(userCredential).then(() => this.router.navigate(['home']));
     }

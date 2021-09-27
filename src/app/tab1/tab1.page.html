@@ -7,35 +7,30 @@
   <ion-text>
     <h1 class="ion-text-center ion-margin-vertical ion-text-capitalize">Hello, {{user.name}}</h1>
   </ion-text>
-  <ion-reorder-group disabled="true" (ionItemReorder)="doReorder($event)"  >
+    <ion-reorder-group *ngIf="todos$ | async as todos" disabled="true" (ionItemReorder)="doReorder($event)"  >
+      <ion-item-sliding *ngFor="let todo of todos; index as i">
+        <ion-item-options side="start">
+          <ion-item-option color="primary" (click)="viewTodo(todo)">View</ion-item-option>
+          <ion-item-option color="secondary" (click)="editTodo(todo)">Edit</ion-item-option>
+        </ion-item-options>
 
-
-  <ion-item-sliding *ngFor="let todo of user.todos; index as i">
-    <ion-item-options side="start">
-      <ion-item-option color="primary" (click)="viewTodo(todo)">View</ion-item-option>
-      <ion-item-option color="secondary" (click)="editTodo(todo)">Edit</ion-item-option>
-    </ion-item-options>
-
-    <ion-item>
-      <ion-label>{{todo}}</ion-label>
-      <ion-reorder slot="end"></ion-reorder>
-    </ion-item>
-
-    <ion-item-options side="end">
-      <ion-item-option color="danger" (click)="deleteTodo(user.userId, i, user.todos)">Delete</ion-item-option>
-    </ion-item-options>
-  </ion-item-sliding>
-
-  </ion-reorder-group>
-  <div #newTodoForm *ngIf="newTodoForm">
-    <ion-label for="todo">Todo: </ion-label>
-    <ion-input id="todo" type="text" [formControl]="todo"></ion-input>
-    <ion-button (click)="createNewTodo(user)">Create Todo</ion-button>
-  </div>
+        <ion-item [routerLink]="['todo-detail/', todo.id]" [state]="{data: {todo: todo}}" routerDirection="forward">
+          <ion-label>{{todo.title}}</ion-label>
+          <ion-reorder slot="end"></ion-reorder>
+        </ion-item>
+        <ion-item-options side="end">
+          <ion-item-option color="danger" (click)="deleteTodo(user.userId, i, user.todos)">Delete</ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-reorder-group>
+  <ion-button color="primary" class="ion-margin-top ion-margin-start">Support others and like</ion-button>
   <ion-button class="ion-float-end ion-margin-top ion-margin-end" color="tertiary" (click)="toggleReorderGroup()">Reorder</ion-button>
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" (click)="newTodo()">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" (click)="presentTodoFormModal(user)">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
+
+

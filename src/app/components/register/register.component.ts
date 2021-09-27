@@ -28,4 +28,8 @@ export class RegisterComponent implements OnInit {
     }
     this.modalController.dismiss(registerInfo);
   }
+
+  dismissModal(){
+    this.modalController.dismiss();
+  }
 }

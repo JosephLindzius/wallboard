@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Location} from '@angular/common'
 import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'wb-logout',
@@ -9,11 +10,11 @@ import {AngularFireAuth, AngularFireAuthModule} from "@angular/fire/compat/auth"
 })
 export class LogoutComponent implements OnInit {
 
-  constructor(private fireAuth: AngularFireAuth) { }
+  constructor(private fireAuth: AngularFireAuth, private router: Router) { }
 
   ngOnInit() {}
 
   logout(){
-    this.fireAuth.signOut().then(()=>window.location.reload());
+    this.fireAuth.signOut().then(()=>this.router.navigate(['']));
   }
 }

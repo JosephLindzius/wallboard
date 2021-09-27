@@ -38,6 +38,8 @@
     "@ionic/pwa-elements": "^3.0.2",
     "@ng-web-apis/common": "^1.12.0",
     "@ng-web-apis/geolocation": "^1.0.4",
+    "@ngrx/store": "^12.4.0",
+    "aframe": "^1.2.0",
     "cordova-plugin-firebase": "^2.0.5",
     "cordova-plugin-firebase-authentication": "^5.0.0",
     "cordova-plugin-splashscreen": "^6.0.0",
@@ -79,7 +81,8 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.2.4"
+    "typescript": "~4.2.4",
+    "eslint-plugin-ngrx": "^1.0.0"
   },
   "description": "An Ionic project"
 }

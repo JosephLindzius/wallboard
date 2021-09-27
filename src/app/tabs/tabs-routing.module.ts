@@ -8,6 +8,8 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {AngularFireAuthGuard, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/fire/compat/auth-guard";
+import {AugmentedRealityComponent} from "../components/augmented-reality/augmented-reality.component";
+import {TodoDetailComponent} from "../components/todo-detail/todo-detail.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -53,6 +55,10 @@ const routes: Routes = [
     component: LoginComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectLoggedInToHome }
+  },
+  {
+    path: 'ar',
+    component: AugmentedRealityComponent
   }
 ];
 

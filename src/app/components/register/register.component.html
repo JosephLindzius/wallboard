@@ -1,5 +1,10 @@
 <ion-content>
   <ion-grid class="ion-margin">
+    <ion-row>
+      <ion-col>
+        <ion-button color="danger" class="ion-float-right" (click)="dismissModal()">X</ion-button>
+      </ion-col>
+    </ion-row>
     <ion-row *ngIf="needName" class="ion-justify-content-center">
       <ion-col>
         <ion-col>

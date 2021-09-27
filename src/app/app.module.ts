@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -17,23 +17,28 @@ import {HeaderComponent} from "./components/header/header.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {Location} from "@angular/common";
+import {AugmentedRealityComponent} from "./components/augmented-reality/augmented-reality.component";
+import { StoreModule } from '@ngrx/store';
+import {metaReducers, reducers} from "./store";
 
 @NgModule({
   declarations: [
-    AppComponent, LoginComponent, RegisterComponent],
+    AppComponent, LoginComponent, RegisterComponent, AugmentedRealityComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(),
     AppRoutingModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(reducers, {metaReducers}),
+    IonicModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFireStorageModule,
-    AngularFireDatabaseModule,
+    AngularFireDatabaseModule
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}

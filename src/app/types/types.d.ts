@@ -30,10 +30,13 @@ export interface CityLocation {
 }
 
 export interface Todo {
-  id?: string;
+  id: string;
+  userId: string;
   title: string;
   desc: string;
   date: string;
+  likes?: number;
+  public: boolean
 }
 
 export interface User {
@@ -48,4 +51,13 @@ export interface RegisterInfo {
   email: string,
   password: string,
   name?: string
+}
+
+export interface Scripts {
+  name: string;
+  src: string;
+}
+
+export interface TodoState {
+  data: Todo[];
 }
