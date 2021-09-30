@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "174044484831",
+    "project_id": "wallboard-ke",
+    "storage_bucket": "wallboard-ke.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:174044484831:android:ae227e9513b648361b056a",
+        "android_client_info": {
+          "package_name": "wallboard.ke"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "174044484831-p5e003uti8ks5ac836v933202bear2lj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHiy-nazM4KZT9XRMTpiG_A6ok6eM_H8o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "174044484831-p5e003uti8ks5ac836v933202bear2lj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

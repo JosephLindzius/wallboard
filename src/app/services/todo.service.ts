@@ -35,19 +35,17 @@ export class TodoService {
 
   }
 
-  createStoreTodo(title): void {
-    let id = Math.random()
-      .toString(36)
-      .substring(7);
-    let todo: Todo = {
-      id: id.toString(),
-      title: title,
-      desc: "",
-      date: "",
-      public: false,
-      userId: ""
+  createStoreTodo(todo: Todo, id: string): void {
+    const newTodo: Todo = {
+      id: id,
+      title: todo.title,
+      desc: todo.desc,
+      date: todo.date,
+      public: todo.public,
+      userId: todo.userId
     };
-    this.store.dispatch(new TodoActions.CreateTodo({ todo: todo }));
+    console.log(newTodo, 'create New Todo')
+    this.store.dispatch(new TodoActions.CreateTodo({ todo: newTodo }));
   }
 
   deleteStoreTodo(todo): void {
@@ -81,10 +79,12 @@ export class TodoService {
   }
 
   createNewTodo(todo: Todo){
+
     this.fireStorage.collection('todos').add(todo).then((data)=>{
       this.fireStorage.collection('todos').doc(data.id).update({
         id: data.id
       })
+      this.createStoreTodo(todo, data.id)
     });
   }
 

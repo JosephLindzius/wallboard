@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Wallboard",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

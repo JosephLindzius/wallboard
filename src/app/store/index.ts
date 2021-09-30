@@ -4,6 +4,7 @@ import * as fromTodoReducers from '../store/reducers/todo.reducer'
 import * as fromTodoSelectors from '../store/selectors/todo.selectors'
 import {TodoState} from "../types/types";
 import {sendMessageToWorker} from "@angular/compiler-cli/ngcc/src/execution/cluster/utils";
+import {from} from "rxjs";
 
 
 export interface AppState {
@@ -24,11 +25,5 @@ export const getAllTodos = createSelector(
 );
 export const getTodoById = (id: string) => createSelector(
   getTodoState,
-
-  (state)=>{
-    console.log(state, 'state')
-    console.log(id, 'id in selector')
-    return fromTodoSelectors.getTodoById(state, {id: id})
-
-  }
+  (TodoState)=> fromTodoSelectors.getTodoById(TodoState, {id: id})
 );

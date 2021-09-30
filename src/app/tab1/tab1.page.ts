@@ -7,6 +7,7 @@ import {UserService} from "../services/user.service";
 import {FormControl} from "@angular/forms";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {TodoFormComponent} from "../components/todo-form/todo-form.component";
+import {map} from "rxjs/operators";
 
 
 
@@ -40,7 +41,9 @@ export class Tab1Page implements OnInit {
       .then((currentUser)=>{
         this.user$ = this.us.getUser(currentUser.uid)
         this.todos$ = this.ts.getAllTodosOfUser(currentUser.uid);
+
       })
+
   }
 
   doReorder(ev: CustomEvent) {
@@ -50,6 +53,8 @@ export class Tab1Page implements OnInit {
 
   ngOnChanges(){
   //  this.user$ = this.us.getsUser();
+    this.ts.getStoreTodoById("4S7RtRDDIuA6hwCE0I9E").pipe(map(console.log))
+    console.log(this.ts.todos.pipe(map(console.log)))
   }
 
   toggleReorderGroup() {
@@ -78,7 +83,7 @@ export class Tab1Page implements OnInit {
     this.ts.deleteTodo(userId, index, todos)
   }
 
-  async presentTodoFormModal(user: User, todos: Todo[]) {
+  async presentTodoFormModal(user: User) {
     const modal = await this.modalController.create({
       component: TodoFormComponent,
       componentProps: {newTodoInfo: this.newTodoInfo},
