@@ -3,7 +3,7 @@
   <h1 class="ion-text-center">Loading...</h1>
   <ion-spinner name="line"></ion-spinner>
 </ng-template>
-<ion-content padding class="background" *ngIf="user$ | async as user; let i=index else loading">
+<ion-content padding class="background" *ngIf="user$ | async as user; else loading">
   <ion-text>
     <h1 class="ion-text-center ion-margin-vertical ion-text-capitalize">Hello, {{user.name}}</h1>
   </ion-text>

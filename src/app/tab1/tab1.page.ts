@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {IonReorderGroup, ModalController} from "@ionic/angular";
 import {Observable} from "rxjs";
 import {TodoService} from "../services/todo.service";
-import {Todo, User} from "../types/types";
+import {Todo, TodoUser} from "../types/types";
 import {UserService} from "../services/user.service";
 import {FormControl} from "@angular/forms";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
@@ -24,7 +24,7 @@ export class Tab1Page implements OnInit {
   date = new FormControl()
   newTodoInfo: Todo;
   newTodoForm: boolean = false;
-  user$: Observable<User[]>
+  user$: Observable<TodoUser>
   todos$: Observable<Todo[]>
 
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
@@ -46,8 +46,8 @@ export class Tab1Page implements OnInit {
 
   }
 
-  doReorder(ev: CustomEvent) {
-    ev.detail.complete();
+  doReorder(ev: Event) {
+    (ev as CustomEvent).detail.complete();
     //this.ts.updateTodos(this.todos)
   }
 
@@ -69,7 +69,7 @@ export class Tab1Page implements OnInit {
 
   }
 
-  createNewTodo(user: User){
+  createNewTodo(user: TodoUser){
     console.log()
     this.ts.createTodo(user.userId, this.todo.value, user.todos);
     this.newTodoForm = !this.newTodoForm;
@@ -83,7 +83,7 @@ export class Tab1Page implements OnInit {
     this.ts.deleteTodo(userId, index, todos)
   }
 
-  async presentTodoFormModal(user: User) {
+  async presentTodoFormModal(user: TodoUser) {
     const modal = await this.modalController.create({
       component: TodoFormComponent,
       componentProps: {newTodoInfo: this.newTodoInfo},

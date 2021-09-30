@@ -9,6 +9,7 @@ import { Tab3Page } from './tab3.page';
 import { Tab3PageRoutingModule } from './tab3-routing.module';
 import {HeaderComponent} from "../components/header/header.component";
 import {LogoutComponent} from "../components/logout/logout.component";
+import {HeaderModule} from "../components/header/header.module";
 
 @NgModule({
   imports: [
@@ -17,10 +18,10 @@ import {LogoutComponent} from "../components/logout/logout.component";
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
+    HeaderModule
   ],
   declarations: [
     Tab3Page,
-    HeaderComponent,
-    LogoutComponent]
+    ]
 })
 export class Tab3PageModule {}

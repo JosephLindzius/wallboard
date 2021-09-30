@@ -9,18 +9,18 @@ import { Tab2Page } from './tab2.page';
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import {HeaderComponent} from "../components/header/header.component";
 import {LogoutComponent} from "../components/logout/logout.component";
+import {HeaderModule} from "../components/header/header.module";
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    Tab2PageRoutingModule
+    Tab2PageRoutingModule,
+    HeaderModule
   ],
   declarations: [
-    Tab2Page,
-    HeaderComponent,
-    LogoutComponent
+    Tab2Page
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

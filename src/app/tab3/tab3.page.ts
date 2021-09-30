@@ -19,7 +19,7 @@ export class Tab3Page implements OnInit, OnChanges {
   public imageSource$!: Observable<string>;
   public weatherReport$!: Observable<WeatherDisplay[]>;
   public getCityLocation$!: Observable<CityLocation>;
-  public quote$: Observable<string>
+  public quote$: Observable<any>
   public cocktail$: Observable<any>
 
   constructor(

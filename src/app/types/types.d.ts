@@ -20,7 +20,10 @@ export interface WeatherDisplay {
 }
 
 export interface NextHour {
-  summary: { precipitation_amount: number },
+  summary: {
+    precipitation_amount: number,
+    symbol_code: string
+  },
   details: { symbol_code: string }
 }
 
@@ -39,7 +42,7 @@ export interface Todo {
   public: boolean
 }
 
-export interface User {
+export interface TodoUser {
   id?: string,
   name: string,
   todos: Todo[],

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {Todo, User} from "../types/types";
+import {Todo, TodoUser} from "../types/types";
 import {map, tap} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import * as TodoActions from "../store/actions/todo.actions";
@@ -108,7 +108,7 @@ export class TodoService {
     }))
   }
 
-  createFullTodo(user: User, todo: Todo){
+  createFullTodo(user: TodoUser, todo: Todo){
     const newTodos = this.unshiftTodos(user.todos, todo)
     this.fireStorage.collection('user').doc(user.userId).update({
       todos: newTodos

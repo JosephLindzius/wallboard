@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
-import {RegisterInfo, Todo, User} from "../types/types";
+import {RegisterInfo, Todo, TodoUser} from "../types/types";
 import {map, take, tap} from "rxjs/operators";
 import firebase from "firebase/compat";
 import UserCredential = firebase.auth.UserCredential;
@@ -14,7 +14,7 @@ export class UserService {
   constructor(private readonly fireStorage: AngularFirestore) { }
 
   addUser(registerInfo: RegisterInfo, user: UserCredential){
-    const newUser: User = {
+    const newUser: TodoUser = {
       name: registerInfo.name,
       todos: [],
       userId: user.user.uid,
@@ -24,7 +24,7 @@ export class UserService {
   }
 
   addGoogleUser(user: UserCredential){
-    const newUser: User = {
+    const newUser: TodoUser = {
       name: user.user.displayName,
       todos: [],
       userId: user.user.uid,
@@ -36,7 +36,7 @@ export class UserService {
   getUsers() {
     return this.fireStorage.collection('users').snapshotChanges().pipe(
       map((users) => {
-        let user: User;
+        let user: TodoUser;
         const mappedUser = users.map((a:any) => {
           user = a.payload.doc.data();
           user.id = a.payload.doc.id;
@@ -48,6 +48,6 @@ export class UserService {
   }
 
   getUser(uid: string) {
-      return this.fireStorage.collection('users').doc<User[]>(uid).valueChanges()
+      return this.fireStorage.collection('users').doc<TodoUser>(uid).valueChanges()
   }
 }
