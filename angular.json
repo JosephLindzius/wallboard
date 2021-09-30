@@ -11,6 +11,14 @@
       "prefix": "wb",
       "schematics": {},
       "architect": {
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "www/",
+            "netlifyToken": "",
+            "siteId": "5d94fcae-bd05-40d1-a85e-efa3d97117f3"
+          }
+        },
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
