@@ -12,9 +12,16 @@ const targetPath = isProduction
 // in the process.env object thanks to dotenv
 const environmentFileContent = `
 export const environment = {
-   production: ${isProduction},
-   API_URL: "${process.env.API_URL}",
-   ANOTHER_API_SECRET: "${process.env.ANOTHER_API_SECRET}"
+  production: true,
+  firebaseConfig: {
+    apiKey: '${process.env.API_KEY}',
+    authDomain: '${process.env.AUTH_DOMAIN}',
+    projectId: '${process.env.PROJECT_ID}',
+    storageBucket: '${process.env.STORAGE_BUCKET}',
+    messagingSenderId: '${process.env.MESSAGING_SENDER_ID}',
+    appId: '${process.env.APP_ID}',
+    measurementId: '${process.env.MEASUREMENT_ID}'
+  }
 };
 `;
 // write the content to the respective file
