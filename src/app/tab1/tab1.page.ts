@@ -8,6 +8,7 @@ import {FormControl} from "@angular/forms";
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {TodoFormComponent} from "../components/todo-form/todo-form.component";
 import {map} from "rxjs/operators";
+import {PublicTodoListComponent} from "../components/public-todo-list/public-todo-list.component";
 
 
 
@@ -26,6 +27,7 @@ export class Tab1Page implements OnInit {
   newTodoForm: boolean = false;
   user$: Observable<TodoUser>
   todos$: Observable<Todo[]>
+  currentDate!: number
 
   @ViewChild(IonReorderGroup) reorderGroup: IonReorderGroup;
 
@@ -37,6 +39,8 @@ export class Tab1Page implements OnInit {
   ) { }
 
   ngOnInit (){
+    this.currentDate = Date.now();
+    console.log(this.currentDate)
     this.fireAuth.currentUser
       .then((currentUser)=>{
         this.user$ = this.us.getUser(currentUser.uid)
@@ -48,17 +52,16 @@ export class Tab1Page implements OnInit {
 
   doReorder(ev: Event) {
     (ev as CustomEvent).detail.complete();
-    //this.ts.updateTodos(this.todos)
   }
 
   ngOnChanges(){
-  //  this.user$ = this.us.getsUser();
-    this.ts.getStoreTodoById("4S7RtRDDIuA6hwCE0I9E").pipe(map(console.log))
-    console.log(this.ts.todos.pipe(map(console.log)))
   }
 
-  toggleReorderGroup() {
+  toggleReorderGroup(user) {
     this.reorderGroup.disabled = !this.reorderGroup.disabled;
+    if(this.reorderGroup.disabled){
+      this.ts.updateFullTodo(user)
+    }
   }
 
   viewTodo(todo: Todo){
@@ -70,7 +73,6 @@ export class Tab1Page implements OnInit {
   }
 
   createNewTodo(user: TodoUser){
-    console.log()
     this.ts.createTodo(user.userId, this.todo.value, user.todos);
     this.newTodoForm = !this.newTodoForm;
   }
@@ -103,6 +105,54 @@ export class Tab1Page implements OnInit {
           this.ts.createNewTodo(todo)
 
       //  this.ts.createFullTodo(user, todo)
+      })
+    return await modal.present();
+  }
+
+  async presentEditTodoFormModal(user: TodoUser, editTodo: Todo) {
+    const modal = await this.modalController.create({
+      component: TodoFormComponent,
+      componentProps: {newTodoInfo: this.newTodoInfo, editTodo},
+      cssClass: 'wallboard-register'
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+        const todo: Todo = {
+          id: '',
+          userId: user.userId,
+          title: data.data.title,
+          desc: data.data.desc,
+          date: data.data.date,
+          public: data.data.public
+        }
+          this.ts.createNewTodo(todo)
+
+      //  this.ts.createFullTodo(user, todo)
+      })
+    return await modal.present();
+  }
+
+  async presentPublicTodoFormModal(user: TodoUser) {
+    const modal = await this.modalController.create({
+      component: PublicTodoListComponent,
+      componentProps: {user: this.user$},
+      cssClass: 'wallboard-public-todo'
+    });
+
+    modal.onDidDismiss()
+      .then((data) => {
+    /*    const todo: Todo = {
+          id: '',
+          userId: user.userId,
+          title: data.data.title,
+          desc: data.data.desc,
+          date: data.data.date,
+          public: data.data.public
+        }
+          this.ts.createNewTodo(todo)
+
+      //  this.ts.createFullTodo(user, todo) */
       })
     return await modal.present();
   }

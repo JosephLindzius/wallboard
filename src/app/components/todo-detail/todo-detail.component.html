@@ -1,20 +1,25 @@
 <wb-header name="Todo Details"></wb-header>
+
 <ion-content>
   <ion-fab vertical="top" horizontal="start" slot="fixed">
     <ion-fab-button (click)="goBack()">
       <ion-icon name="arrow-back-circle-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-content>
-<ion-content *ngIf="todo">
-  <ion-item>
-    <ion-title>
-      <h1>{{todo.title}}</h1>
-    </ion-title>
-    <ion-text>
-      <p>{{todo.desc}}</p>
-      <p>{{todo.date}}</p>
-    </ion-text>
-  </ion-item>
+  <ion-card *ngIf="todo" class="ion-margin">
+
+      <ion-card-title>
+        <h1 class="ion-text-center">{{todo.title}}</h1>
+      </ion-card-title>
+
+    <ion-card-content>
+      <ion-text class="ion-text-center">
+        <p>{{todo.desc}}</p>
+        <hr>
+        <p>Due: {{todo.date}}</p>
+      </ion-text>
+    </ion-card-content>
+
+  </ion-card>
 </ion-content>
 

@@ -38,7 +38,7 @@ export interface Todo {
   title: string;
   desc: string;
   date: string;
-  likes?: number;
+  likes?: string[];
   public: boolean
 }
 

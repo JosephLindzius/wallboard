@@ -16,14 +16,23 @@ export class TodoFormComponent implements OnInit {
   date = new FormControl()
   public = new FormControl(false)
 
+  editTodo!: Todo
+
   constructor(private modalController: ModalController) { }
 
-  ngOnInit() {}
+  ngOnInit() {
+    if(this.editTodo){
+      this.title = new FormControl(this.editTodo.title);
+      this.desc = new FormControl(this.editTodo.desc);
+      this.date = new FormControl(this.editTodo.date)
+      this.public  = new FormControl(this.editTodo.public)
+    }
+  }
 
   onSubmit(){
     const todo: Todo = {
-      id: "",
-      userId: "",
+      id: "" || this.editTodo.id,
+      userId: "" || this.editTodo.userId,
       title: this.title.value,
       desc: this.desc.value,
       date: this.date.value,

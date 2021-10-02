@@ -13,6 +13,7 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import {TodoFormComponent} from "../components/todo-form/todo-form.component";
 import {TodoDetailComponent} from "../components/todo-detail/todo-detail.component";
 import {HeaderModule} from "../components/header/header.module";
+import {PublicTodoListComponent} from "../components/public-todo-list/public-todo-list.component";
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {HeaderModule} from "../components/header/header.module";
   declarations: [
     Tab1Page,
     TodoFormComponent,
-    TodoDetailComponent
+    TodoDetailComponent,
+    PublicTodoListComponent
   ]
 })
 export class Tab1PageModule {}

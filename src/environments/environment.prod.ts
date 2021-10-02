@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 const { API_KEY,
   AUTH_DOMAIN,
-  WALLBOARD_KE,
+  PROJECT_ID,
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID,
   APP_ID,
@@ -11,7 +13,7 @@ export const environment = {
   firebaseConfig: {
     apiKey: API_KEY,
     authDomain: AUTH_DOMAIN,
-    projectId: WALLBOARD_KE,
+    projectId: PROJECT_ID,
     storageBucket: STORAGE_BUCKET,
     messagingSenderId: MESSAGING_SENDER_ID,
     appId: APP_ID,

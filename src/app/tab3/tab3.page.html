@@ -1,10 +1,12 @@
 <wb-header [name]="'Weather & More'"></wb-header>
 <ion-content class="ion-padding background">
   <ng-template #loadingBlock>
-    <ion-text color="dark">
-      <h2>Loading... </h2>
-    </ion-text>
-    <ion-spinner class="" name="bubbles" vertical="top" horizontal="center" duration="2000"></ion-spinner>
+    <ion-item>
+      <ion-text color="dark">
+        <h2>Loading... </h2>
+      </ion-text>
+      <ion-spinner name="dots" slot="end" duration="2000"></ion-spinner>
+    </ion-item>
   </ng-template>
   <ion-item>
     <ion-grid>
@@ -35,7 +37,7 @@
     </ion-thumbnail>
     <ion-label>Random Dog</ion-label>
   </ion-item>
-  <ion-item *ngIf="quote$ | async as quote" class="ion-margin-top">
+  <ion-item *ngIf="quote$ | async as quote" class="ion-margin-top ion-text-center">
     <ion-text>
       <h6 class="ion-text-center">Random joke:</h6>
       <p class="ion-text-center ion-margn-top">{{quote.value[0].joke}}</p>

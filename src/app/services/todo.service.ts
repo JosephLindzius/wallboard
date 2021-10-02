@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from "@angular/fire/compat/firestore";
+import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {Todo, TodoUser} from "../types/types";
-import {map, tap} from "rxjs/operators";
-import {Observable, of} from "rxjs";
+import {filter, map, tap} from "rxjs/operators";
+import {ObjectUnsubscribedError, Observable, of} from "rxjs";
 import * as TodoActions from "../store/actions/todo.actions";
 import {AppState, getAllTodos, getTodoById} from "../store";
 import {Store} from "@ngrx/store";
@@ -92,6 +92,12 @@ export class TodoService {
     return this.fireStorage.collection('todos').valueChanges()
   }
 
+  getPublicTodos(userId: string){
+    return this.fireStorage.collection('todos').valueChanges().pipe(map((todos:Todo[])=>{
+      return todos.filter(todo=>todo.public === true && todo.userId !== userId)
+    }))
+  }
+
   getTodoDetail(id: string){
     console.log(id)
     return this.fireStorage.collection('todos').doc(id)
@@ -113,5 +119,17 @@ export class TodoService {
     this.fireStorage.collection('user').doc(user.userId).update({
       todos: newTodos
     })
+  }
+
+  updateFullTodo(user: TodoUser){
+    this.fireStorage.collection('users').doc(user.userId).update({
+      todos: user.todos
+    })
+  }
+
+  addStar(todo: Todo, userId: string){
+   this.fireStorage.collection('todos').doc(todo.id).update({
+      likes: [...todo.likes, userId]
+    });
   }
 }

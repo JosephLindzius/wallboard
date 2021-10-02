@@ -4,14 +4,16 @@
   <ion-spinner name="line"></ion-spinner>
 </ng-template>
 <ion-content padding class="background" *ngIf="user$ | async as user; else loading">
+  <ion-item>
+    <ion-label slot="end">{{currentDate | date: 'dd/MM/yyyy HH:mm'}}</ion-label>
+  </ion-item>
   <ion-text>
     <h1 class="ion-text-center ion-margin-vertical ion-text-capitalize">Hello, {{user.name}}</h1>
   </ion-text>
     <ion-reorder-group *ngIf="todos$ | async as todos" disabled="true" (ionItemReorder)="doReorder($event)"  >
       <ion-item-sliding *ngFor="let todo of todos; index as i">
         <ion-item-options side="start">
-          <ion-item-option color="primary" (click)="viewTodo(todo)">View</ion-item-option>
-          <ion-item-option color="secondary" (click)="editTodo(todo)">Edit</ion-item-option>
+          <ion-item-option color="secondary" (click)="presentEditTodoFormModal(user, todo)">Edit</ion-item-option>
         </ion-item-options>
 
         <ion-item [routerLink]="['todo-detail/', todo.id]" [state]="{data: {todo: todo}}" routerDirection="forward">
@@ -23,8 +25,8 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-reorder-group>
-  <ion-button color="primary" class="ion-margin-top ion-margin-start">Support others and like</ion-button>
-  <ion-button class="ion-float-end ion-margin-top ion-margin-end" color="tertiary" (click)="toggleReorderGroup()">Reorder</ion-button>
+  <ion-button color="primary" class="ion-margin-top ion-margin-start" (click)="presentPublicTodoFormModal(user)">Support others</ion-button>
+  <ion-button class="ion-float-end ion-margin-top ion-margin-end" color="tertiary" (click)="toggleReorderGroup(user)">Reorder</ion-button>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed" (click)="presentTodoFormModal(user)">
     <ion-fab-button>
       <ion-icon name="add"></ion-icon>
