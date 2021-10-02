@@ -34,7 +34,7 @@ export class Tab2Page implements OnInit {
       this.router.navigate(['ar']);
   }
 
-  goToPicture(){
+  goToPicture(photo: Photo){
 
   }
 }

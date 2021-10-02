@@ -1,4 +1,4 @@
-require('dotenv').config();
+import {env} from 'process'
 
 const { API_KEY,
   AUTH_DOMAIN,
@@ -6,7 +6,7 @@ const { API_KEY,
   STORAGE_BUCKET,
   MESSAGING_SENDER_ID,
   APP_ID,
-  MEASUREMENT_ID} = process.env
+  MEASUREMENT_ID} = env
 
 export const environment = {
   production: true,
