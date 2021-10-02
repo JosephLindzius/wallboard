@@ -5,13 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyDTD6kFvYKMHfcdDsEGS1WNOFCoHys_Bz4",
-    authDomain: "wallboard-ke.firebaseapp.com",
-    projectId: "wallboard-ke",
-    storageBucket: "wallboard-ke.appspot.com",
-    messagingSenderId: "174044484831",
-    appId: "1:174044484831:web:cacff257b1ea190a1b056a",
-    measurementId: "G-W7G3S26M70"
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID,
+    appId: process.env.APP_ID,
+    measurementId: process.env.MESSAGING_SENDER_ID
   }
 };
 
