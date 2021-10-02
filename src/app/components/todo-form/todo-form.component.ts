@@ -30,13 +30,25 @@ export class TodoFormComponent implements OnInit {
   }
 
   onSubmit(){
-    const todo: Todo = {
-      id: "" || this.editTodo.id,
-      userId: "" || this.editTodo.userId,
+    let todo: Todo = {
+      id: "",
+      userId: "",
       title: this.title.value,
       desc: this.desc.value,
       date: this.date.value,
-      public: this.public.value
+      public: this.public.value,
+      likes: []
+    }
+    if(this.editTodo){
+      todo = {
+        id: this.editTodo.id,
+        userId: this.editTodo.userId,
+        title: this.title.value,
+        desc: this.desc.value,
+        date: this.date.value,
+        public: this.public.value,
+        likes: []
+      }
     }
     this.modalController.dismiss(todo);
   }

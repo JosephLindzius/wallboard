@@ -40,7 +40,6 @@ export class Tab1Page implements OnInit {
 
   ngOnInit (){
     this.currentDate = Date.now();
-    console.log(this.currentDate)
     this.fireAuth.currentUser
       .then((currentUser)=>{
         this.user$ = this.us.getUser(currentUser.uid)
@@ -62,14 +61,6 @@ export class Tab1Page implements OnInit {
     if(this.reorderGroup.disabled){
       this.ts.updateFullTodo(user)
     }
-  }
-
-  viewTodo(todo: Todo){
-
-  }
-
-  editTodo(todo: Todo){
-
   }
 
   createNewTodo(user: TodoUser){
@@ -100,7 +91,8 @@ export class Tab1Page implements OnInit {
           title: data.data.title,
           desc: data.data.desc,
           date: data.data.date,
-          public: data.data.public
+          public: data.data.public,
+          likes: data.data.likes
         }
           this.ts.createNewTodo(todo)
 
@@ -124,6 +116,7 @@ export class Tab1Page implements OnInit {
           title: data.data.title,
           desc: data.data.desc,
           date: data.data.date,
+          likes: data.data.public,
           public: data.data.public
         }
           this.ts.createNewTodo(todo)

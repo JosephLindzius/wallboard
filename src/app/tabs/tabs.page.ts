@@ -17,7 +17,6 @@ export class TabsPage implements OnInit {
   ) {}
 
   ngOnInit (){
-    console.log(this.platform.is("desktop"))
     if (this.platform.is('desktop')) {
       this.desktop = true;
     }
