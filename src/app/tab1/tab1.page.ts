@@ -80,13 +80,11 @@ export class Tab1Page implements OnInit {
 
     const endDate = new Date(todoDate).getDate()
     const nowDate = new Date().getDate();
-    let daysLeft = endDate - nowDate
-    console.log(daysLeft, endDate, "enddate")
+    let daysLeft =  endDate - nowDate
+
     if(timeLeft < 0){
-      daysLeft *= -1;
+      return 'danger'
     }
-    console.log(timeLeft)
-    console.log(daysLeft)
     if(daysLeft < 1){
       return 'danger'
     }if(daysLeft >= 1 && daysLeft <= 5){
@@ -164,7 +162,7 @@ export class Tab1Page implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
           if(data.data){
-            this.router.navigate(['tabs/tab1/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: data.role}}})
+            this.router.navigate(['tabs/tab1/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user}}})
           }
       })
     return await modal.present();
@@ -179,7 +177,7 @@ export class Tab1Page implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        this.router.navigate(['tabs/tab1/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user.id}}})
+        this.router.navigate(['tabs/tab1/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user}}})
       })
     return await modal.present();
   }

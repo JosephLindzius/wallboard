@@ -8,6 +8,7 @@ import {UserService} from "../../services/user.service";
 import {CommentService} from "../../services/comment.service";
 import {Observable} from "rxjs";
 import {map, switchMap} from "rxjs/operators";
+import {AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 
 @Component({
   selector: 'wb-todo-detail',
@@ -23,6 +24,8 @@ export class TodoDetailComponent implements OnInit {
   comment: FormControl = new FormControl('')
   userId: string
 
+  userName!: Observable<unknown>
+
   constructor(private location: Location, private router: Router, private ts: TodoService, private us: UserService, private cs: CommentService) { }
 
   ngOnInit(): void {
@@ -30,14 +33,13 @@ export class TodoDetailComponent implements OnInit {
       this.todo = history.state.data.todo
       if(history.state.data.user){
         this.user = history.state.data.user
-        this.userId = history.state.data.user
+      //  this.userId = history.state.data.user
       }
       this.comments$ = this.cs.getTodoComments(this.todo.id)
     }
     if(this.todo === undefined){
       this.router.navigate(['home'])
     }
-
   }
 
   deleteComment(comment: Comment){
@@ -55,12 +57,12 @@ export class TodoDetailComponent implements OnInit {
   }
 
   submitComment(){
-
     const comment: Comment = {
       id: "",
       todoId: this.todo.id,
-      userId: this.userId,
-      comment: this.comment.value
+      userId: this.user.userId || this.userId,
+      comment: this.comment.value,
+      userName: this.user.name
     }
     this.cs.addTodoComment(comment);
   }

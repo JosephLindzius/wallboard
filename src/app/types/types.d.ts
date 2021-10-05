@@ -42,6 +42,8 @@ export interface Todo {
   public: boolean
   completed?: boolean
   comment?: Comment[]
+  creationDate?: string
+  userName?: string
 }
 
 export interface Comment {
@@ -50,6 +52,7 @@ export interface Comment {
   todoId: string
   comment: string
   likes?: string[]
+  userName?: string
 }
 
 export interface TodoUser {

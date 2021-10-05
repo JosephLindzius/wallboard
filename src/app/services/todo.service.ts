@@ -83,12 +83,10 @@ export class TodoService {
 
     this.fireStorage.collection('todos').add(todo).then((data)=>{
       this.fireStorage.collection('todos').doc(data.id).update({
-        id: data.id
+        id: data.id,
+        creationDate: FieldValue.serverTimestamp()
       })
       this.createStoreTodo(todo, data.id)
-      this.fireStorage.collection('users').doc(todo.userId).update({
-        todo: FieldValue.arrayUnion(todo.id)
-      })
     });
   }
 

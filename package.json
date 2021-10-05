@@ -51,6 +51,8 @@
     "cordova-support-android-plugin": "^1.0.2",
     "dotenv": "^10.0.0",
     "firebase": "^9.1.1",
+    "rss-to-json": "^2.0.2",
+    "rxfire": "^6.0.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "yargs": "^17.2.1",

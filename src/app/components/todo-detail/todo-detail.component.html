@@ -34,7 +34,7 @@
   <div *ngIf="comments$ | async as comments">
     <ion-card *ngFor="let comment of comments">
       <ion-item>
-        <ion-label>Comment by: {{comment.userId}}</ion-label>
+        <ion-label>Comment by: {{comment?.userName }}</ion-label>
         <ion-button *ngIf="(comment.userId === user.userId || todo.userId === user.userId) || comment.userId === userId" color="danger" (click)="deleteComment(comment)">X</ion-button>
       </ion-item>
       <ion-card-content>
@@ -47,7 +47,7 @@
     <ion-input [formControl]="comment" type="text">
       <ion-label>Comment:</ion-label>
     </ion-input>
-    <ion-button expand="block" (click)="submitComment()">Post Comment</ion-button>
+    <ion-button expand="block" (click)="submitComment(user.userId)">Post Comment</ion-button>
   </ion-card>
 </ion-content>
 

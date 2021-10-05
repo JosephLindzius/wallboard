@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {RegisterInfo, Todo, TodoUser} from "../types/types";
 import {map, take, tap} from "rxjs/operators";
-//import firebase from "firebase/compat";
 import UserCredential = firebase.auth.UserCredential;
 import FieldValue = firebase.firestore.FieldValue;
 import firebase from "firebase/compat/app";
+
 
 
 
@@ -51,6 +51,11 @@ export class UserService {
         return mappedUser
       })
     ); */
+  }
+
+  getUserName(uid){
+    return this.fireStorage.collection('users').doc<TodoUser>(uid).valueChanges()
+
   }
 
   getUser(uid: string) {
