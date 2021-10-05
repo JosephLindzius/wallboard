@@ -3,9 +3,7 @@ import {DogPictureService} from "../services/dog-picture.service";
 import {Observable} from "rxjs";
 import {CityLocation, DogPicture, GeoCoords, WeatherDisplay} from "../types/types";
 import {WeatherReportService} from "../services/weather-report.service";
-import {GeolocationLookupService} from "../services/geolocation-lookup.service";
 import {CityLocatorService} from "../services/city-locator.service";
-import {map, take, tap} from "rxjs/operators";
 import {InspirationQuoteService} from "../services/inspiration-quote.service";
 import {CocktailService} from "../services/cocktail.service";
 

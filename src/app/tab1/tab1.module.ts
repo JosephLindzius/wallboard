@@ -14,6 +14,7 @@ import {TodoFormComponent} from "../components/todo-form/todo-form.component";
 import {TodoDetailComponent} from "../components/todo-detail/todo-detail.component";
 import {HeaderModule} from "../components/header/header.module";
 import {PublicTodoListComponent} from "../components/public-todo-list/public-todo-list.component";
+import {CompletedTodoListComponent} from "../components/completed-todo-list/completed-todo-list.component";
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {PublicTodoListComponent} from "../components/public-todo-list/public-tod
     Tab1Page,
     TodoFormComponent,
     TodoDetailComponent,
-    PublicTodoListComponent
+    PublicTodoListComponent,
+    CompletedTodoListComponent
   ]
 })
 export class Tab1PageModule {}

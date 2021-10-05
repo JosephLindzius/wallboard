@@ -6,6 +6,8 @@ import {ObjectUnsubscribedError, Observable, of} from "rxjs";
 import * as TodoActions from "../store/actions/todo.actions";
 import {AppState, getAllTodos, getTodoById} from "../store";
 import {Store} from "@ngrx/store";
+import firebase from "firebase/compat/app";
+import FieldValue = firebase.firestore.FieldValue;
 
 
 @Injectable({
@@ -14,6 +16,7 @@ import {Store} from "@ngrx/store";
 export class TodoService {
 
   public todos: Observable<Todo[]>;
+
 
   constructor(private store: Store<AppState>, private fireStorage: AngularFirestore) {
     this.todos = this.store.select(getAllTodos);
@@ -67,10 +70,8 @@ export class TodoService {
     return this.fireStorage.doc('todos/' + todo.id).update(todo)
   }
 
-  deleteTodo(userId: string, todoIndex: number, todos: Todo[]){
-    this.fireStorage.doc('users/'+userId).update({
-      todos: todos.filter((todo, index)=>index !== todoIndex)
-    });
+  deleteTodo(todoId: string){
+    this.fireStorage.collection('todos/').doc(todoId).delete();
   }
 
   unshiftTodos(todos: Todo[], todo: Todo){
@@ -85,7 +86,21 @@ export class TodoService {
         id: data.id
       })
       this.createStoreTodo(todo, data.id)
+      this.fireStorage.collection('users').doc(todo.userId).update({
+        todo: FieldValue.arrayUnion(todo.id)
+      })
     });
+  }
+
+  editNewFunctionTodo(todo: Todo){
+
+    this.fireStorage.collection('todos').doc(todo.id).update({
+      title: todo.title,
+      desc: todo.desc,
+      date: todo.date,
+      public: todo.public
+      })
+     // this.createStoreTodo(todo, data.id)
   }
 
   getAllTodos(){
@@ -94,18 +109,26 @@ export class TodoService {
 
   getPublicTodos(userId: string){
     return this.fireStorage.collection('todos').valueChanges().pipe(map((todos:Todo[])=>{
-      return todos.filter(todo=>todo.public === true && todo.userId !== userId)
+      return todos.filter(todo=>todo.public === true && todo.userId !== userId && !todo.completed)
+    }))
+  }
+
+  getCompletedTodos(userId: string){
+    return this.fireStorage.collection('todos').valueChanges().pipe(map((todos:Todo[])=>{
+      return todos.filter(todo=>todo.completed === true && todo.userId === userId)
     }))
   }
 
   getTodoDetail(id: string){
-    console.log(id)
     return this.fireStorage.collection('todos').doc(id)
   }
 
   getAllTodosOfUser(userId: string): Observable<Todo[]> {
     return this.fireStorage.collection('todos').valueChanges().pipe(
       map((data:Todo[])=>{
+        data.sort(function(a,b) {
+          return new Date(a.date).getTime() - new Date(b.date).getTime()
+        })
         return data.filter((todo: Todo)=>{
           if(todo.userId === userId) {
             return todo
@@ -132,4 +155,5 @@ export class TodoService {
       likes: [...todo.likes, userId]
     });
   }
+
 }

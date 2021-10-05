@@ -3,7 +3,7 @@
     <ion-row class="ion-margin-bottom">
       <ion-col>
         <ion-text class="ion-text-center">
-          <h5>Make a new todo!</h5>
+          <h5>{{editTodo? 'Edit Todo': 'New Todo'}}</h5>
         </ion-text>
       </ion-col>
       <ion-col size="2">
@@ -24,7 +24,7 @@
   </ion-row>
     <ion-row>
       <ion-col>
-        <ion-label for="date">Date: </ion-label>
+        <ion-label for="date">Due Date: </ion-label>
         <ion-input color="medium" class="ion-margin-vertical" id="date" type="date" [formControl]="date"></ion-input>
       </ion-col>
     </ion-row>
@@ -36,7 +36,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button expand="block" (click)="onSubmit()">Create Todo</ion-button>
+        <ion-button expand="block" (click)="onSubmit()">{{editTodo? 'Save': 'Create new Todo'}}</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

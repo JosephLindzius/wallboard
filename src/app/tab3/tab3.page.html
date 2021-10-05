@@ -38,7 +38,7 @@
     <ion-label>Random Dog</ion-label>
   </ion-item>
   <ion-item *ngIf="quote$ | async as quote" class="ion-margin-top ion-text-center">
-    <ion-text>
+    <ion-text  class="ion-text-center">
       <h6 class="ion-text-center">Random joke:</h6>
       <p class="ion-text-center ion-margn-top">{{quote.value[0].joke}}</p>
     </ion-text>

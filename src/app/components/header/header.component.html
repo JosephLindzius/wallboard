@@ -1,5 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
+    <ion-buttons *ngIf="backButton" slot="start">
+      <ion-back-button text="Back">Test</ion-back-button>
+    </ion-buttons>
+    <ion-icon *ngIf="!backButton" src="./assets/logo.svg"></ion-icon>
     <ion-title>
       {{name}}
     </ion-title>

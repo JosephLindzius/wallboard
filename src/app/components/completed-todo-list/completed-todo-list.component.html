@@ -1,0 +1,15 @@
+<ion-content>
+
+  <ion-item>
+    <ion-button slot="end" class="ion-margin-top ion-float-end" color="danger" (click)="dismissModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+    <ion-label><h3>Completed Todos</h3></ion-label>
+  </ion-item>
+
+  <ion-list *ngIf="todos$ | async as todos">
+    <ion-item *ngFor="let todo of todos" (click)="goToTodo(todo)" class="ion-margin-vertical ion-margin-top">
+      <ion-label>{{todo.title}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

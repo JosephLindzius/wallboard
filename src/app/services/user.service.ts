@@ -2,8 +2,11 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore} from "@angular/fire/compat/firestore";
 import {RegisterInfo, Todo, TodoUser} from "../types/types";
 import {map, take, tap} from "rxjs/operators";
-import firebase from "firebase/compat";
+//import firebase from "firebase/compat";
 import UserCredential = firebase.auth.UserCredential;
+import FieldValue = firebase.firestore.FieldValue;
+import firebase from "firebase/compat/app";
+
 
 
 @Injectable({
@@ -34,7 +37,10 @@ export class UserService {
   }
   //admin only
   getUsers() {
-    return this.fireStorage.collection('users').snapshotChanges().pipe(
+    return this.fireStorage.collection('users').snapshotChanges()
+
+
+   /*   .pipe(
       map((users) => {
         let user: TodoUser;
         const mappedUser = users.map((a:any) => {
@@ -44,10 +50,27 @@ export class UserService {
         })
         return mappedUser
       })
-    );
+    ); */
   }
 
   getUser(uid: string) {
-      return this.fireStorage.collection('users').doc<TodoUser>(uid).valueChanges()
+     return this.fireStorage.collection('users').doc<TodoUser>(uid).valueChanges()
   }
+
+  getUserDetail(id: string){
+    return this.fireStorage.collection('users').doc(id).snapshotChanges();
+  }
+
+  completeTodo(todo: Todo) {
+    this.fireStorage.collection('users').doc(todo.userId).update({
+     completed: FieldValue.arrayUnion(todo.id)
+    })
+  }
+
+  addTodo(todo: Todo){
+    this.fireStorage.collection('users').doc(todo.userId).update({
+      todo: FieldValue.arrayUnion(todo.id)
+    })
+  }
+
 }

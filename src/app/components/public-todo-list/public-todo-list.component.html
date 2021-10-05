@@ -1,9 +1,18 @@
 <ion-content>
+
+  <ion-item>
+    <ion-button slot="end" class="ion-margin-top ion-float-end" color="danger" (click)="dismissModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-button>
+    <ion-label><h3>Community Todos</h3></ion-label>
+  </ion-item>
   <ion-list *ngIf="todos$ | async as todos">
-    <ion-item class="ion-margin-vertical" *ngFor="let todo of todos">
-      {{todo.title}}
-      <ion-text *ngIf="todo.likes" class="ion-margin-start">{{todo.likes.length}}</ion-text>
-      <ion-fab-button slot="end" color="secondary" (click)="giveStar(todo)">Star</ion-fab-button>
+    <ion-item class="ion-margin-vertical ion-margin-top" *ngFor="let todo of todos">
+      <ion-label (click)="goToTodo(todo)">{{todo.title}}</ion-label>
+      <ion-badge color="secondary" *ngIf="todo.likes" class="ion-margin-start ion-float-end">{{todo.likes.length}}</ion-badge>
+      <ion-fab-button size="small" slot="end" color="secondary" (click)="giveStar(todo)">
+        <ion-icon name="star-outline"></ion-icon>
+      </ion-fab-button>
     </ion-item>
   </ion-list>
 </ion-content>

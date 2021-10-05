@@ -33,16 +33,27 @@ export interface CityLocation {
 }
 
 export interface Todo {
-  id: string;
-  userId: string;
-  title: string;
-  desc: string;
-  date: string;
-  likes?: string[];
+  id: string
+  userId: string
+  title: string
+  desc: string
+  date: string
+  likes?: string[]
   public: boolean
+  completed?: boolean
+  comment?: Comment[]
+}
+
+export interface Comment {
+  id: string
+  userId: string
+  todoId: string
+  comment: string
+  likes?: string[]
 }
 
 export interface TodoUser {
+  completed?: [];
   id?: string,
   name: string,
   todos: Todo[],

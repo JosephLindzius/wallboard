@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Platform} from "@ionic/angular";
+import {UserService} from "../services/user.service";
 
 
 @Component({
@@ -14,12 +15,12 @@ export class TabsPage implements OnInit {
 
   constructor(
     private platform: Platform,
+    private us: UserService
   ) {}
 
   ngOnInit (){
     if (this.platform.is('desktop')) {
       this.desktop = true;
     }
-
   }
 }
