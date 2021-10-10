@@ -10,6 +10,7 @@ import { Tab3PageRoutingModule } from './tab3-routing.module';
 import {HeaderComponent} from "../components/header/header.component";
 import {LogoutComponent} from "../components/logout/logout.component";
 import {HeaderModule} from "../components/header/header.module";
+import {ImagePopoverComponent} from "../components/image-popover/image-popover.component";
 
 @NgModule({
   imports: [
@@ -18,10 +19,12 @@ import {HeaderModule} from "../components/header/header.module";
     FormsModule,
     RouterModule.forChild([{ path: '', component: Tab3Page }]),
     Tab3PageRoutingModule,
-    HeaderModule
+    HeaderModule,
+
   ],
   declarations: [
     Tab3Page,
+    ImagePopoverComponent
     ]
 })
 export class Tab3PageModule {}

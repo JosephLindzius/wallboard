@@ -13,7 +13,6 @@ import {AngularFireStorageModule} from "@angular/fire/compat/storage";
 import {environment} from "../environments/environment";
 import {AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import {LoginComponent} from "./components/login/login.component";
-import {HeaderComponent} from "./components/header/header.component";
 import {RegisterComponent} from "./components/register/register.component";
 import {ReactiveFormsModule} from "@angular/forms";
 import {Location} from "@angular/common";

@@ -6,7 +6,7 @@
           size="6"
           *ngFor="let photo of photos; index as position">
 
-          <ion-img (click)="goToPicture(photo)" [src]="photo.webviewPath"></ion-img>
+          <ion-img (click)="showPopover(photo)" [src]="photo.webviewPath"></ion-img>
         </ion-col>
       </ion-row>
     </ion-grid>

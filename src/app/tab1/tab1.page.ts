@@ -98,7 +98,7 @@ export class Tab1Page implements OnInit {
 
 
   goToDetail(todo: Todo, user: TodoUser){
-    this.router.navigate(['tabs/tab1/todo-detail/', todo.id], {state: {data: {todo: todo, user: user}}})
+    this.router.navigate(['/kinetic-energy/todoboard/todo-detail/', todo.id], {state: {data: {todo: todo, user: user}}})
   }
 
   async presentTodoFormModal(user: TodoUser) {
@@ -162,7 +162,7 @@ export class Tab1Page implements OnInit {
     modal.onDidDismiss()
       .then((data) => {
           if(data.data){
-            this.router.navigate(['tabs/tab1/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user}}})
+            this.router.navigate(['/kinetic-energy/todoboard/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user}}})
           }
       })
     return await modal.present();
@@ -177,7 +177,7 @@ export class Tab1Page implements OnInit {
 
     modal.onDidDismiss()
       .then((data) => {
-        this.router.navigate(['tabs/tab1/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user}}})
+        this.router.navigate(['/kinetic-energy/todoboard/todo-detail/', data.data.id], {state: {data: {todo: data.data, user: user}}})
       })
     return await modal.present();
   }

@@ -6,6 +6,8 @@ import {WeatherReportService} from "../services/weather-report.service";
 import {CityLocatorService} from "../services/city-locator.service";
 import {InspirationQuoteService} from "../services/inspiration-quote.service";
 import {CocktailService} from "../services/cocktail.service";
+import {PopoverController} from "@ionic/angular";
+import {ImagePopoverComponent} from "../components/image-popover/image-popover.component";
 
 @Component({
   selector: 'app-tab3',
@@ -25,7 +27,8 @@ export class Tab3Page implements OnInit, OnChanges {
     private weatherReportService: WeatherReportService,
     private cityLocator: CityLocatorService,
     private inspirationQuoteService: InspirationQuoteService,
-    private cocktailService: CocktailService
+    private cocktailService: CocktailService,
+    private ps: PopoverController
   ) {}
 
   ngOnInit(){
@@ -40,4 +43,29 @@ export class Tab3Page implements OnInit, OnChanges {
     this.weatherReport$ = this.weatherReportService.getWeatherReport();
   }
 
+  async showDogPopover(imageSouce: string) {
+    const popover = await this.ps.create({
+      component: ImagePopoverComponent,
+      componentProps: {imageSource: imageSouce, title: 'Random Dog Picture'},
+      cssClass: 'image-popover',
+      translucent: true
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
+
+  async showCocktailPopover(cocktail: any) {
+    const popover = await this.ps.create({
+      component: ImagePopoverComponent,
+      componentProps: {drink: cocktail, title: 'Drink Recipe'},
+      cssClass: 'image-popover',
+      translucent: true
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
+  }
 }

@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {PhotoService} from "../services/photo.service";
-import {ModalController} from "@ionic/angular";
+import {ModalController, PopoverController} from "@ionic/angular";
 import {Photo, Todo} from "../types/types";
 import {TodoFormComponent} from "../components/todo-form/todo-form.component";
 import {AugmentedRealityComponent} from "../components/augmented-reality/augmented-reality.component";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
+import {ImagePopoverComponent} from "../components/image-popover/image-popover.component";
 
 @Component({
   selector: 'app-tab2',
@@ -18,7 +19,8 @@ export class Tab2Page implements OnInit {
 
   constructor(private photoService: PhotoService,
               private modalController: ModalController,
-              private router: Router) {}
+              private router: Router,
+              private ps: PopoverController) {}
 
   async ngOnInit(){
       await this.photoService.loadSaved().then(()=>{
@@ -34,7 +36,16 @@ export class Tab2Page implements OnInit {
       this.router.navigate(['ar']);
   }
 
-  goToPicture(photo: Photo){
+    async showPopover(photo: Photo) {
+      const popover = await this.ps.create({
+        component: ImagePopoverComponent,
+        componentProps: {imageSource: photo.webviewPath, title: 'Gallery Picture'},
+        cssClass: 'image-popover',
+        translucent: true
+      });
+      await popover.present();
 
-  }
+      const { role } = await popover.onDidDismiss();
+      console.log('onDidDismiss resolved with role', role);
+    }
 }

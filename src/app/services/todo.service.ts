@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
 import {Todo, TodoUser} from "../types/types";
-import {filter, map, tap} from "rxjs/operators";
-import {ObjectUnsubscribedError, Observable, of} from "rxjs";
+import {map} from "rxjs/operators";
+import {Observable} from "rxjs";
 import * as TodoActions from "../store/actions/todo.actions";
 import {AppState, getAllTodos, getTodoById} from "../store";
 import {Store} from "@ngrx/store";
@@ -106,7 +106,7 @@ export class TodoService {
   }
 
   getPublicTodos(userId: string){
-    return this.fireStorage.collection('todos').valueChanges().pipe(map((todos:Todo[])=>{
+    return this.fireStorage.collection('todos', ref => ref.orderBy('creationDate')).valueChanges().pipe(map((todos:Todo[])=>{
       return todos.filter(todo=>todo.public === true && todo.userId !== userId && !todo.completed)
     }))
   }

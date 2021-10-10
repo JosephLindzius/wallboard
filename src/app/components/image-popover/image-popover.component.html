@@ -1,0 +1,31 @@
+<section>
+  <ng-template #regularImage>
+    <h3 class="ion-text-center">{{title}}</h3>
+    <img class="ion-padding" [src]="imageSource">
+  </ng-template>
+  <div *ngIf="drink; else regularImage">
+    <ion-item>
+      <ion-label>
+        <h3>{{drink.strDrink}}</h3>
+      </ion-label>
+      <ion-thumbnail  slot="start">
+        <img class="ion-padding" [src]="drink.strDrinkThumb">
+      </ion-thumbnail>
+    </ion-item>
+    <ion-item>
+      Type: {{drink.strAlcoholic}}
+    </ion-item>
+    <ion-list>
+      <ion-item *ngFor="let ingredient of ingredients.ingredient; let i = index">
+        <ion-label>
+          {{ingredient}}
+        </ion-label>
+        <ion-text slot="end">
+          {{ingredients.amount[i]}}
+        </ion-text>
+     </ion-item>
+    </ion-list>
+      <ion-item class="ion-padding">{{drink.strInstructions}}</ion-item>
+  </div>
+</section>
+

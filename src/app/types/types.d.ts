@@ -1,6 +1,12 @@
 export interface Photo {
+  id?: string
   filepath: string;
   webviewPath: string;
+  userId?: string;
+  creationDate?: string;
+  comment?: Comment[]
+  likes?: string[]
+  public?: boolean
 }
 
 export interface DogPicture {
@@ -78,3 +84,9 @@ export interface Scripts {
 export interface TodoState {
   data: Todo[];
 }
+
+export interface Ingredients {
+  ingredient: string[]
+  amount: string[]
+}
+

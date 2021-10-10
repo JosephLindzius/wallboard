@@ -4,7 +4,11 @@
       <ion-title>Login</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-grid>
+  <ion-grid class="ion-justify-content-center ion-align-items-center">
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="ion-margin-vertical">
+      </ion-col>
+    </ion-row>
     <ion-row>
       <ion-col>
         <ion-text class="ion-text-center">
@@ -14,7 +18,11 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col>
+      <ion-col class="ion-margin-vertical">
+      </ion-col>
+    </ion-row>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="">
         <ion-button expand="block" (click)="loginWithGoogle()">
           <ion-icon class="ion-margin" name="logo-google"></ion-icon>
           <ion-label>Login with Google</ion-label>
@@ -22,24 +30,20 @@
       </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col>
-        <ion-col>
+        <ion-col class="col-lg-3">
           <ion-button expand="block" (click)="presentLoginModal()">
             <ion-img class="wallboard-icon" [src]="'./assets/logo.svg'"></ion-img>
             <ion-label>Login with Wallboard</ion-label>
           </ion-button>
         </ion-col>
-      </ion-col>
     </ion-row>
     <ion-row class="ion-justify-content-center">
-      <ion-col>
         <ion-col>
           <ion-button expand="block" (click)="presentRegisterModal()">
             <ion-img class="wallboard-icon" [src]="'./assets/logo.svg'"></ion-img>
             <ion-label>Register with Wallboard</ion-label>
           </ion-button>
         </ion-col>
-      </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
