@@ -16,7 +16,6 @@ export class CocktailService {
 
   get cocktail(){
     return this.http.get<any>(this.sourceURL).pipe(map((cocktails)=>{
-      console.log(cocktails.drinks[0])
       return cocktails.drinks[0]
     }))
   }

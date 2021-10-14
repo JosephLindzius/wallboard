@@ -57,14 +57,16 @@ export class TodoDetailComponent implements OnInit {
   }
 
   submitComment(){
-    const comment: Comment = {
-      id: "",
-      todoId: this.todo.id,
-      userId: this.user.userId || this.userId,
-      comment: this.comment.value,
-      userName: this.user.name
+    if(this.comment !== null) {
+      const comment: Comment = {
+        id: "",
+        todoId: this.todo.id,
+        userId: this.user.userId || this.userId,
+        comment: this.comment.value,
+        userName: this.user.name
+      }
+      this.cs.addTodoComment(comment);
     }
-    this.cs.addTodoComment(comment);
   }
 
 }

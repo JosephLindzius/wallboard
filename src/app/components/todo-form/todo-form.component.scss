@@ -4,8 +4,8 @@
   }
 }
 
-body.dark {
-  ion-input.accent {
-    --background: #FFFFFF;
-  }
+ion-input {
+  border-radius: 8px;
+  --background: var(--ion-color-light);
 }
+

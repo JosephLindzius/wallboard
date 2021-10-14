@@ -52,8 +52,6 @@ export class Tab3Page implements OnInit, OnChanges {
     });
     await popover.present();
 
-    const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 
   async showCocktailPopover(cocktail: any) {
@@ -65,7 +63,5 @@ export class Tab3Page implements OnInit, OnChanges {
     });
     await popover.present();
 
-    const { role } = await popover.onDidDismiss();
-    console.log('onDidDismiss resolved with role', role);
   }
 }

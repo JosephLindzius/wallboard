@@ -17,3 +17,15 @@
   color: white;
 }
 
+ion-content {
+  --background: rgba(0, 0,0,0);
+}
+
+.warning-message { display: none; }
+@media only screen and (orientation:portrait){
+  .wrapper { display:none; }
+  .warning-message { display:block;
+  z-index: 10}
+}
+
+

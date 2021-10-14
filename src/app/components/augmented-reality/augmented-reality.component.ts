@@ -22,10 +22,11 @@ export class AugmentedRealityComponent implements OnInit {
   ngOnInit() {
     this.sl.load('aframe', 'aframe-ar').then(()=>this.loaded=true);
     this.geoLocation$ = this.gl.pipe(take(1),tap(console.log), delay(10000));
-
   }
 
+
+
   goToLogin(){
-    this.router.navigate([''])
+    this.router.navigate(['']).then(()=>window.location.reload())
   }
 }

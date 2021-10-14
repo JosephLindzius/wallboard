@@ -1,9 +1,19 @@
-<a-scene *ngIf="loaded" embedded arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'>
-  <a-marker type="pattern" url="./assets/pattern-wb-logo-bw.patt">
-    <a-box scale="0.5 0.5 0.5" position="0 0 0" mmd='outline: true afterglow:2.0;'></a-box>
-  </a-marker>
+<ion-content>
+    <a-scene physics *ngIf="loaded" embedded arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960;'>
+      <a-marker type="pattern" url="./assets/pattern-wb-logo-bw.patt">
+        <a-entity scale="0.02 0.02 0.02" gltf-model="url(/assets/botw/scene.gltf)"></a-entity>
+        <a-text position="2 0 0" value='This work is based on "Zelda - Breath Of The Wild" (https://sketchfab.com/3d-models/zelda-breath-of-the-wild-bf99374334a64291ae2876c83269adb6) by theStoff (https://sketchfab.com/theStoff) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)'></a-text>
+      </a-marker>
+      <a-marker preset="hiro">
+        <a-box scale="0.5 0.5 0.5" color="blue" position="0 0 0" mmd='outline: true afterglow:2.0;'></a-box>
+        <a-sphere scale="0.5 0.5 0.5" color="blue" radius="1.2" position="0 1 0" mmd='outline: true afterglow:2.0;'></a-sphere>
+        <a-box scale="0.5 0.5 0.5" color="red" position="0 2 0" rotation="0 45 0" mmd='outline: true afterglow:2.0;'></a-box>
+      </a-marker>
+      <a-entity camera ></a-entity>
 
-  <a-entity camera ></a-entity>
 
-</a-scene>
-<ion-button extend="block" class="a-enter-vr-button" style="bottom: 50px; background: var(--ion-background-color);" (click)="goToLogin()">Go back</ion-button>
+    </a-scene>
+    <ion-button extend="block" class="a-enter-vr-button" style="bottom: 50px; background: var(--ion-background-color);" (click)="goToLogin()">Go back</ion-button>
+</ion-content>
+
+

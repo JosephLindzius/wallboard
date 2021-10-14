@@ -3,10 +3,10 @@
     <ion-buttons *ngIf="backButton" slot="start">
       <ion-back-button text="Back"></ion-back-button>
     </ion-buttons>
-    <ion-icon slot="start" *ngIf="!backButton" src="./assets/logo.svg"></ion-icon>
+    <ion-icon class="ion-margin-start" slot="start" *ngIf="!backButton" src="./assets/logo.svg"></ion-icon>
     <ion-title class="ion-text-center">
       {{name}}
     </ion-title>
-    <wb-logout slot="end"></wb-logout>
+    <wb-logout class="ion-margin-end" slot="end"></wb-logout>
   </ion-toolbar>
 </ion-header>

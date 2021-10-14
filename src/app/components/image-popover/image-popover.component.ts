@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Ingredients} from "../../types/types";
+import {Drink, Ingredients} from "../../types/types";
 
 @Component({
   selector: 'wb-image-popover',
@@ -10,7 +10,7 @@ export class ImagePopoverComponent implements OnInit {
 
   imageSource!: string
   title!: string
-  drink: any;
+  drink: Drink;
   ingredients: Ingredients
   ingredientLimit: number = 16;
 
