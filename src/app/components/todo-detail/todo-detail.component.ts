@@ -66,6 +66,7 @@ export class TodoDetailComponent implements OnInit {
         userName: this.user.name
       }
       this.cs.addTodoComment(comment);
+      this.comment.reset('')
     }
   }
 
